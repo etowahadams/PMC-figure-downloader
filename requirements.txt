@@ -1,2 +1,4 @@
 biopython=1.83
 requests=2.31.0
+polars=0.20.16
+ipykernel
