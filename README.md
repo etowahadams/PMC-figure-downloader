@@ -14,15 +14,19 @@ pip install -r requirements.txt
 ## Usage
 See `example.ipynb` for a Jupyter notebook example.
 
-### Get paper IDs from a search query
+### Query PMC for open access papers
 ```python
 query = '"Nature Genetics"[Journal] AND "open access"[filter]'
-# a list of paper IDs
+# Returns a list of paper IDs
 result_ids = search_pmc(query, email="your-email-here@gmail.com", max_results=10)
 ```
-### Extract figure information and URLs from a paper
+### Extract figure information and URLs from a list of paper IDs
 ```python
+# A list of PMC IDs
+result_ids = ["10937393", "10864173"]
+# A dataframe with figure information
 figure_data = extract_pmc_figures(result_ids)
+# Save the dataframe to a parquet file if you want to use it later
 figure_data.write_parquet("figure_data.parquet")
 ```
 The `figure_data` dataframe looks like this:

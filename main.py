@@ -9,7 +9,7 @@ import time
 def fix_cp1252_to_utf8(text):
     """
     Converts text that was originally encoded in CP-1252 but was read and sent as UTF-8,
-    back to its original form. This function was written by Claude.
+    back to its original form.
 
     Args:
         text (str): The input text that needs to be fixed.
