@@ -35,8 +35,11 @@ ns = {"": "https://jats.nlm.nih.gov/ns/archiving/1.3/"}
 
 def get_text_or_empty(element, xpath):
     node = element.find(xpath, namespaces=ns)
+    if node is None:
+        return ""
     text_content = ET.tostring(node, method="text", encoding="unicode")
-    return text_content if node is not None else ""
+    return text_content
+
 
 # TODO: Determine which of these are necessary
 headers = {
@@ -115,6 +118,7 @@ def download_imgs(data: pl.DataFrame, dir: str) -> pl.DataFrame:
     }
     for i, url in enumerate(data["image_url"]):
         print(f"Downloading image {i + 1} of {len(data)}...")
+        time.sleep(0.1) # Be nice to the server
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
             with open(f"{dir}/{data['pmcid'][i]}_{data['fig_id'][i]}.jpg", "wb") as f:
